@@ -27,7 +27,7 @@ jobs:
           crystal build src/frozen_layer.cr --release --target ${{ matrix.platform }}-unknown-linux-gnu
 
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: frzen-layer-${{ matrix.platform }}
           path: ./frozen_layer
