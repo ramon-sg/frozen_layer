@@ -1,0 +1,12 @@
+{
+  "graphqlUrl": "http://localhost:3000/graphql",
+  "storedUrl": "redis://localhost:6359/0",
+  "storeUrl": "redis://localhost:6359/0",
+
+  "operationsMap": {
+    "searchProduct": {
+      "expiration": "1m",
+      "enabled": true
+    }
+  }
+}

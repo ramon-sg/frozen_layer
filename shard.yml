@@ -1,0 +1,30 @@
+name: frozen_layer
+version: 0.1.0
+
+authors:
+  - Ramón Soto <ddsstr@gmail.com>
+
+targets:
+  frozen_layer:
+    main: src/frozen_layer.cr
+
+dependencies:
+  dotenv:
+    github: gdotdesign/cr-dotenv
+
+  redis:
+    github: stefanwille/crystal-redis
+
+  cr-color-logging:
+    github: vici37/cr-color-logging
+
+  grip:
+    github: grip-framework/grip
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+
+crystal: ">= 1.13.3"
+
+license: MIT

@@ -1,0 +1,10 @@
+# Mac finder artifacts
+.DS_Store
+
+/docs/
+/lib/
+/bin/
+/.shards/
+*.dwarf
+/.env.development
+/config.json

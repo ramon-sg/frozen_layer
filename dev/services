@@ -1,0 +1,13 @@
+#!/bin/bash
+DEFAULT_ENV_FILE=.env
+LOCAL_ENV_FILE=.env.development
+
+if test -f "$LOCAL_ENV_FILE"; then
+  CURRENT_ENV_FILE=$LOCAL_ENV_FILE
+else
+  CURRENT_ENV_FILE=$DEFAULT_ENV_FILE
+fi
+
+echo "CURRENT_ENV_FILE : $CURRENT_ENV_FILE"
+
+ENV_FILE=$CURRENT_ENV_FILE docker compose -p cleanqueen-cypress  --env-file $CURRENT_ENV_FILE -f  ./docker-compose.services.dev.yml "$@"

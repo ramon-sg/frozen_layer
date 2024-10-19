@@ -1,0 +1,2 @@
+services: dev/services up 1>/dev/null
+api: CRYSTAL_ENV=development PORT=3003 dev/watch

@@ -1,0 +1,9 @@
+
+DATABASE_PORT=5322
+DATABASE_USER=postgres
+DATABASE_PASSWORD=postgres
+
+STORE_PORT=6359
+
+
+CONFIG_PATH="./config.json"

@@ -1,0 +1,4 @@
+{
+  "editor.formatOnSave": true,
+  "notebook.defaultFormatter": "crystal-lang-tools.crystal-lang"
+}
