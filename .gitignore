@@ -8,3 +8,4 @@
 *.dwarf
 /.env.development
 /config.json
+/frozen_layer
