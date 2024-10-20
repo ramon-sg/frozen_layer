@@ -2,10 +2,17 @@ require "redis"
 
 module FrozenLayer
   module Store
-    def self.instance
-      Log.for("store").info { "Connecting to #{FrozenLayer.config.store_url}" }
+    def self.logger
+      @@logger ||= Log.for("Store")
+    end
 
+    def self.init
+      logger.info { "Connecting to #{FrozenLayer.config.store_url}" }
       @@store ||= Redis.new(url: FrozenLayer.config.store_url)
+    end
+
+    def self.instance
+      @@store || init
     end
 
     def self.get(key)

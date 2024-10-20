@@ -6,11 +6,11 @@ module FrozenLayer
     end
 
     def host : String
-      ENV["HOST"]? || "localhost"
+      ENV["HOST"]? || DEFAULT_HOST
     end
 
     def port : Int32
-      ENV["PORT"]?.try(&.to_i) || 3000
+      ENV["PORT"]?.try(&.to_i) || DEFAULT_PORT
     end
 
     def draw_routes

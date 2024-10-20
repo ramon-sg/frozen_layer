@@ -10,9 +10,6 @@ module FrozenLayer
     @[JSON::Field(key: "graphqlUrl")]
     property graphql_url : String = "/graphql"
 
-    @[JSON::Field(converter: FrozenLayer::TimeSpanConverter)]
-    property expiration : Time::Span = 5.minute
-
     @[JSON::Field(key: "operationsMap")]
     property operations_map : OperationsMap | Nil
 

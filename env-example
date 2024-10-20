@@ -1,9 +1,5 @@
 
-DATABASE_PORT=5322
-DATABASE_USER=postgres
-DATABASE_PASSWORD=postgres
-
-STORE_PORT=6359
+STORE_PORT=6359 # docker-compose.service.dev.yml
 
 
 CONFIG_PATH="./config.json"

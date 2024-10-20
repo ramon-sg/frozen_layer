@@ -26,7 +26,7 @@ module FrozenLayer
         @status = 200,
         @body = nil,
         @headers = nil,
-      ) # begin
+      )
       end
     end
 
@@ -48,11 +48,17 @@ module FrozenLayer
 
         stored_response = Store.get(graphql_hash)
 
-        return Result.new(body: stored_response) if stored_response
+        return stored_result(stored_response) if stored_response
 
         exec_query(params).tap do |result|
           store_response(graphql_hash, result, operation.expiration) if result.status == 200
         end
+      end
+
+      private def stored_result(body : String) : Result
+        headers = HTTP::Headers{"Content-Type" => "application/json"}
+
+        Result.new(body: body, headers: headers)
       end
 
       private def parse_params(body : String?, headers : HTTP::Headers?) : {String, Nil} | {Nil, Params}
