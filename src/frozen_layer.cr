@@ -9,6 +9,10 @@ require "./frozen_layer/helpers/*"
 require "./frozen_layer/converters/*"
 require "./frozen_layer/*"
 
+module FrozenLayer
+  VERSION = "0.1.0"
+end
+
 Dotenv.load? ".env.#{FrozenLayer.config.environment}"
 FrozenLayer.load_config?(ENV["CONFIG_PATH"]?)
 
