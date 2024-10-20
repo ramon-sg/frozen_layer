@@ -13,6 +13,12 @@ module FrozenLayer
     @[JSON::Field(key: "operationsMap")]
     property operations_map : OperationsMap | Nil
 
+    @[JSON::Field(key: "storeConnectionPoolSize")]
+    property store_connection_pool_size : Int32 = 5
+
+    @[JSON::Field(key: "storeConnectionTimeout")]
+    property store_connection_timeout : Float64 = 0.01
+
     def dev?
       environment == Environment::DEVELOPMENT
     end

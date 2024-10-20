@@ -2,6 +2,8 @@
   "graphqlUrl": "http://localhost:3000/graphql",
   "storeUrl": "redis://localhost:6359/0",
 
+  "storeConnectionPoolSize": 1000,
+
   "operationsMap": {
     "searchProduct": {
       "expiration": "1m",
