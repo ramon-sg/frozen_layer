@@ -32,14 +32,19 @@ module FrozenLayer
     def self.get(key)
       logger.debug { "Getting #{key}" }
 
+      start_time = Time.monotonic
+
       instance.get(key).tap do |value|
-        logger.debug { "Got #{value}" }
+        end_time = Time.monotonic
+        duration = (end_time - start_time).total_milliseconds
+
+        logger.debug { "Got #{truncate_string(value)} in #{duration}ms" }
       end
     end
 
     # ex -- Set the specified expire time
     def self.set(key, value, ex : Time::Span? = nil)
-      logger.debug { "Set #{key} to #{value}" }
+      logger.debug { "Set #{key} to #{truncate_string(value)}" }
       instance.set(key, value, ex: ex.try(&.to_i))
 
       # instance.connection do |conn|
