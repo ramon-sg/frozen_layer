@@ -21,9 +21,6 @@ dependencies:
   grip:
     github: grip-framework/grip
 
-  pool:
-    github: ysbaddaden/pool
-
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
