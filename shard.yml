@@ -13,7 +13,12 @@ dependencies:
     github: gdotdesign/cr-dotenv
 
   redis:
-    github: stefanwille/crystal-redis
+    # github: stefanwille/crystal-redis
+    github: jgaskins/redis
+
+  exception_page:
+    github: crystal-loot/exception_page
+    version: 0.4.1
 
   cr-color-logging:
     github: vici37/cr-color-logging
