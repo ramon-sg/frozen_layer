@@ -17,15 +17,15 @@ module FrozenLayer
       #   Redis.new(url: FrozenLayer.config.store_url)
       # end
 
-      # @@store ||= Redis::PooledClient.new(
-      #   url: FrozenLayer.config.store_url,
-      #   pool_size: FrozenLayer.config.store_connection_pool_size,
-      #   pool_timeout: FrozenLayer.config.store_connection_timeout
-      # )
-      pool_params = "?initial_pool_size=1&max_pool_size=10&checkout_timeout=#{FrozenLayer.config.store_connection_timeout}&retry_attempts=2&retry_delay=0.5&max_idle_pool_size=#{FrozenLayer.config.store_connection_pool_size}&keepalive=true&keepalive_count=5&keepalive_idle=10&keepalive_interval=15"
-      @@store = Redis::Client.new(
-        URI.parse "#{FrozenLayer.config.store_url}#{pool_params}"
+      @@store ||= Redis::PooledClient.new(
+        url: FrozenLayer.config.store_url,
+        pool_size: FrozenLayer.config.store_connection_pool_size,
+        pool_timeout: FrozenLayer.config.store_connection_timeout
       )
+      # pool_params = "?initial_pool_size=1&max_pool_size=10&checkout_timeout=#{FrozenLayer.config.store_connection_timeout}&retry_attempts=2&retry_delay=0.5&max_idle_pool_size=#{FrozenLayer.config.store_connection_pool_size}&keepalive=true&keepalive_count=5&keepalive_idle=10&keepalive_interval=15"
+      # @@store = Redis::Client.new(
+      #   URI.parse "#{FrozenLayer.config.store_url}#{pool_params}"
+      # )
     end
 
     def self.instance

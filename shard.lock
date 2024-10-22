@@ -12,10 +12,6 @@ shards:
     git: https://github.com/vici37/cr-color-logging.git
     version: 1.0.0+git.commit.268ed66748540fdb197af9f5d35e09cec64dbe1a
 
-  db:
-    git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.13.1
-
   dotenv:
     git: https://github.com/gdotdesign/cr-dotenv.git
     version: 1.0.0
@@ -26,13 +22,17 @@ shards:
 
   grip:
     git: https://github.com/grip-framework/grip.git
-    version: 3.0.0
+    version: 3.0.1
+
+  pool:
+    git: https://github.com/ysbaddaden/pool.git
+    version: 0.2.4
 
   radix:
     git: https://github.com/luislavena/radix.git
     version: 0.4.1
 
   redis:
-    git: https://github.com/jgaskins/redis.git
-    version: 0.10.0
+    git: https://github.com/stefanwille/crystal-redis.git
+    version: 2.9.1
 
