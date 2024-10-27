@@ -19,6 +19,9 @@ module FrozenLayer
     @[JSON::Field(key: "storeConnectionTimeout")]
     property store_connection_timeout : Float64 = 0.01
 
+    @[JSON::Field(key: "corsDomain")]
+    property cors_domain : String = "*"
+
     def dev?
       environment == Environment::DEVELOPMENT
     end

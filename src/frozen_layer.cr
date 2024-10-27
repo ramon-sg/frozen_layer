@@ -27,8 +27,8 @@ Log::ShortColorFormat.with_colored_severity(Log::Severity::Error, :red)
 Log::ShortColorFormat.with_colored_severity(Log::Severity::Info, :blue)
 Log::ShortColorFormat.with_colored_severity(Log::Severity::Warn, :yellow)
 
-Log.info { "Starting FrozenLayer in #{FrozenLayer.config.environment} environment" }
-Log.info { "FrozenLayer v#{FrozenLayer::VERSION}" }
+Log.info { "Starting in #{FrozenLayer.config.environment} environment" }
+Log.info { "🚀 Frozen Layer #{FrozenLayer::VERSION}" }
 
 FrozenLayer::Store.init
 FrozenLayer::Application.new.run

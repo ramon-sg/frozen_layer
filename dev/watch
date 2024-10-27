@@ -33,5 +33,6 @@ fi
 # Execute the command
 watchexec -r -w src -- crystal run src/frozen_layer.cr
 # watchexec -r -w src -- crystal run --error-trace src/frozen_layer.cr
+# find ./src -name "*.cr" | entr crystal run src/frozen_layer.cr
 
 

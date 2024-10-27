@@ -2,10 +2,10 @@ module FrozenLayer
   module GraphqlCache
     struct Params
       getter operation_name : String?
-      getter variables : Hash(String, JSON::Any)
+      getter variables : Hash(String, JSON::Any)?
       getter query : String?
       getter headers : HTTP::Headers?
-      getter body : String?
+      getter body : String
 
       def initialize(
         @operation_name,
@@ -21,11 +21,13 @@ module FrozenLayer
       getter status : Int32
       getter body : String?
       getter headers : HTTP::Headers?
+      getter? cache : Bool = false
 
       def initialize(
         @status = 200,
         @body = nil,
         @headers = nil,
+        @cache = false,
       )
       end
     end
@@ -51,14 +53,15 @@ module FrozenLayer
         return stored_result(stored_response) if stored_response
 
         exec_query(params).tap do |result|
-          store_response(graphql_hash, result, operation.expiration) if result.status == 200
+          next if result.status != 200
+          store_response(graphql_hash, result, operation.expiration)
         end
       end
 
       private def stored_result(body : String) : Result
         headers = HTTP::Headers{"Content-Type" => "application/json"}
 
-        Result.new(body: body, headers: headers)
+        Result.new(body: body, headers: headers, cache: true)
       end
 
       private def parse_params(body : String?, headers : HTTP::Headers?) : {String, Nil} | {Nil, Params}
@@ -66,8 +69,8 @@ module FrozenLayer
 
         begin
           json = JSON.parse(body)
-          query = json["query"].as_s
-          variables = json["variables"].as_h
+          query = json["query"]?.try(&.as_s)
+          variables = json["variables"]?.try(&.as_h)
           operation_name = json["operationName"]?.try(&.as_s) || extract_operation_name(query)
 
           {nil, Params.new(operation_name, query, variables, headers, body)}
