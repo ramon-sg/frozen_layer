@@ -8,6 +8,7 @@ class CorsMiddleware
 
   def call(context : HTTP::Server::Context)
     context.response.headers.add "Access-Control-Allow-Origin", domain
+    context.response.headers.add "Vary", "Origin"
     context.response.headers.add "Access-Control-Allow-Credentials", "true"
     context.response.headers.add "Access-Control-Allow-Headers", "Content-Type,Authorization"
 
