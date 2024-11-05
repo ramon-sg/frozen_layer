@@ -10,6 +10,9 @@ module FrozenLayer
     @[JSON::Field(key: "graphqlUrl")]
     property graphql_url : String = "/graphql"
 
+    @[JSON::Field(key: "proxyUrl")]
+    property proxy_url : String | Nil
+
     @[JSON::Field(key: "operationsMap")]
     property operations_map : OperationsMap | Nil
 
