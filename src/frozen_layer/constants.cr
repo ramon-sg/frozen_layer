@@ -8,5 +8,5 @@ module FrozenLayer
   DEFAULT_HOST = "localhost"
   DEFAULT_PORT = 3000
 
-  VERSION = "0.1.4"
+  VERSION = "0.1.5"
 end
