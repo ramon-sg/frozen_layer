@@ -11,7 +11,6 @@ module FrozenLayer
 
           result.headers.try do |headers|
             headers.each do |key, value|
-              puts "key: #{key}, value: #{value}"
               put_resp_header(key, value)
             end
           end
