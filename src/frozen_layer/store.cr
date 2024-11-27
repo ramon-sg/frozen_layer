@@ -9,7 +9,17 @@ module FrozenLayer
     def self.init
       logger.info { "Connecting to #{FrozenLayer.config.store_url}" }
 
-      @@store ||= Redis::PooledClient.new(
+      @@store ||= begin
+        create_store
+      rescue ex : Redis::Error
+        logger.error { "Redis connection failed: #{ex.message}" }
+        sleep 1
+        create_store
+      end.as(Redis::PooledClient)
+    end
+
+    def self.create_store : Redis::PooledClient
+      Redis::PooledClient.new(
         url: FrozenLayer.config.store_url,
         pool_size: FrozenLayer.config.store_connection_pool_size,
         pool_timeout: FrozenLayer.config.store_connection_timeout
