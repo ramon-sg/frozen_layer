@@ -20,7 +20,7 @@ module FrozenLayer
     property store_connection_pool_size : Int32 = 5
 
     @[JSON::Field(key: "storeConnectionTimeout")]
-    property store_connection_timeout : Float64 = 0.01
+    property store_connection_timeout : Float64 = 5.0
 
     @[JSON::Field(key: "corsDomain")]
     property cors_domain : String = "*"
