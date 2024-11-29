@@ -87,14 +87,32 @@ module FrozenLayer
         end
       end
 
-      private def exec_query(params : Params) : Result
-        response = graphql(params.headers, params.body)
+      private def exec_query(params : Params, max_retries = 3) : Result
+        retries = 0
 
-        Result.new(
-          status: response.status_code,
-          body: response.body,
-          headers: response.headers,
-        )
+        loop do
+          begin
+            response = graphql(params.headers, params.body)
+            return Result.new(
+              status: response.status_code,
+              body: response.body,
+              headers: response.headers,
+            )
+          rescue ex : HTTP::Server::ClientError | IO::Error
+            log.error { "Exception: #{ex.inspect} - Retrying (#{retries}/#{max_retries})..." }
+
+            retries += 1
+
+            if retries >= max_retries
+              return Result.new(
+                status: 500,
+                body: {"error": "Failed after #{max_retries} attempts: #{ex.message}"}.to_json
+              )
+            end
+
+            sleep(0.1 * (2 ** retries)) # Exponential backoff
+          end
+        end
       end
 
       private def build_graphql_params(params : Params)
@@ -117,6 +135,10 @@ module FrozenLayer
         spawn do
           Store.set(hash, result.body, expiration)
         end
+      end
+
+      private def log
+        Log.for("GraphqlCache::EndpointService")
       end
     end
   end
