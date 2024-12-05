@@ -33,6 +33,19 @@ module FrozenLayer
     end
 
     class EndpointService
+      @client : HTTP::Client
+      @uri : URI
+
+      def initialize
+        @uri = URI.parse(FrozenLayer.config.graphql_url)
+        begin
+          @client = HTTP::Client.new(@uri.host.not_nil!, @uri.port)
+          @client.connect_timeout = FrozenLayer.config.connect_timeout if FrozenLayer.config.connect_timeout
+        ensure
+          @client.close
+        end
+      end
+
       def perform(body : String?, headers : HTTP::Headers?) : Result
         error, parsed_params = parse_params(body, headers)
 
@@ -110,7 +123,7 @@ module FrozenLayer
               )
             end
 
-            sleep(0.1 * (2 ** retries)) # Exponential backoff
+            sleep((0.1 * (2 ** retries)).seconds) # Exponential backoff
           end
         end
       end
@@ -124,11 +137,7 @@ module FrozenLayer
       end
 
       private def graphql(headers, body)
-        HTTP::Client.post(
-          url: FrozenLayer.config.graphql_url,
-          headers: headers,
-          body: body,
-        )
+        @client.post(@uri.path, headers, body)
       end
 
       private def store_response(hash : String, result : Result, expiration : Time::Span)

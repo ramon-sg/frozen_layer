@@ -25,6 +25,9 @@ module FrozenLayer
     @[JSON::Field(key: "corsDomain")]
     property cors_domain : String = "*"
 
+    @[JSON::Field(key: "connectTimeout", converter: FrozenLayer::TimeSpanConverter)]
+    property connect_timeout : Time::Span | Nil
+
     def dev?
       environment == Environment::DEVELOPMENT
     end
