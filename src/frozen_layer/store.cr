@@ -13,7 +13,7 @@ module FrozenLayer
         create_store
       rescue ex : Redis::Error
         logger.error { "Redis connection failed: #{ex.message}" }
-        sleep 1
+        sleep 1.second
         create_store
       end.as(Redis::PooledClient)
     end
