@@ -7,9 +7,12 @@ module FrozenLayer
     def initialize
       super(environment: FrozenLayer.config.environment)
 
-      router.insert(1, CorsMiddleware.new(
-        domain: FrozenLayer.config.cors_domain
-      ))
+      if FrozenLayer.config.cors_regex || FrozenLayer.config.cors_domain
+        router.insert(1, CorsMiddleware.new(
+          cors_domain: FrozenLayer.config.cors_domain,
+          cors_regex: FrozenLayer.config.cors_regex
+        ))
+      end
 
       draw_routes
     end

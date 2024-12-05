@@ -25,6 +25,10 @@ module FrozenLayer
     @[JSON::Field(key: "corsDomain")]
     property cors_domain : String = "*"
 
+    # The cors regex have priority over the cors domain
+    @[JSON::Field(key: "corsRegex")]
+    property cors_regex : String | Nil
+
     @[JSON::Field(key: "connectTimeout", converter: FrozenLayer::TimeSpanConverter)]
     property connect_timeout : Time::Span | Nil
 
