@@ -10,6 +10,9 @@ Lint/UnusedBlockArgument:
   Enabled: true
   Severity: Warning
 
+Lint/NotNil:
+  Enabled: false
+
 # Problems found: 3
 # Run `ameba --only Naming/PredicateName` for details
 Naming/PredicateName:

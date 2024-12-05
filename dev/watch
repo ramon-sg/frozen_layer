@@ -31,7 +31,7 @@ if ! command -v watchexec &> /dev/null; then
 fi
 
 # Execute the command
-watchexec -r -w src -- crystal run src/frozen_layer.cr
+PORT=3003 watchexec -r -w src -- crystal run src/frozen_layer.cr
 # watchexec -r -w src -- crystal run --error-trace src/frozen_layer.cr
 # find ./src -name "*.cr" | entr crystal run src/frozen_layer.cr
 
