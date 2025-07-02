@@ -3,6 +3,7 @@
   "storeUrl": "redis://localhost:6379/0",
 
   "storeConnectionPoolSize": 1000,
+  "graphqlPath": "/graphql",
 
   "operationsMap": {
     "searchProduct": {

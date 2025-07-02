@@ -29,6 +29,6 @@ Log::ShortColorFormat.with_colored_severity(Log::Severity::Warn, :yellow)
 
 Log.info { "Starting in #{FrozenLayer.config.environment} environment" }
 Log.info { "🚀 Frozen Layer #{FrozenLayer::VERSION}" }
-
+Log.info { "🔗 GraphQL Path: #{FrozenLayer.config.graphql_path}" }
 FrozenLayer::Store.init
 FrozenLayer::Application.new.run

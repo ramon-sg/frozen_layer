@@ -14,7 +14,7 @@ module FrozenLayer
         ))
       end
 
-      draw_routes
+      draw_routes(FrozenLayer.config.graphql_path)
     end
 
     def draw_routes

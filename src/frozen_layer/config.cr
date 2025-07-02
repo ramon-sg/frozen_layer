@@ -32,6 +32,9 @@ module FrozenLayer
     @[JSON::Field(key: "connectTimeout", converter: FrozenLayer::TimeSpanConverter)]
     property connect_timeout : Time::Span | Nil
 
+    @[JSON::Field(key: "graphqlPath")]
+    property graphql_path : String = "/"
+
     def dev?
       environment == Environment::DEVELOPMENT
     end
