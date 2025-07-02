@@ -12,19 +12,19 @@ module FrozenLayer
             end
           end
 
-          url, headers = params(ctx, proxy_url)
-          respond ctx, HTTP::Client.{{method.id}}(url, headers)
+          url, headers, body = params(ctx, proxy_url)
+          respond ctx, HTTP::Client.{{method.id}}(url, headers, body: body)
         end
       {% end %}
 
-      private def params(ctx : Context, proxy_url : String) : {URI, HTTP::Headers}
+      private def params(ctx : Context, proxy_url : String) : {URI, HTTP::Headers, IO?}
         request = ctx.request
         target_url = proxy_url + request.path
         headers = request.headers
         url = URI.parse(target_url)
         url.query_params = request.query_params
 
-        {url, headers}
+        {url, headers, request.body}
       end
 
       private def respond(ctx : Context, response : HTTP::Client::Response) : Context
