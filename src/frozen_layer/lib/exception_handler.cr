@@ -25,7 +25,13 @@ module Grip
       private def call_exception(context : HTTP::Server::Context, exception : ::Exception, status_code : Int32)
         return context if context.response.closed?
 
-        ::Log.for("ExceptionHandler").error { "Exception: #{exception.inspect}" }
+        ::Log.for("ExceptionHandler").error {
+          "Exception -  #{exception.inspect}
+          Status Code: #{status_code}
+          Method     : #{context.request.method}
+          Path       : #{context.request.path}
+          Body       : #{context.request.body.try(&.gets_to_end)}"
+        }
 
         if @handlers.has_key?(exception.class.name)
           context.response.status_code = status_code
