@@ -1,6 +1,6 @@
 {
   "graphqlUrl": "http://localhost:3000/graphql",
-  "storeUrl": "redis://localhost:6359/0",
+  "storeUrl": "redis://localhost:6379/0",
 
   "storeConnectionPoolSize": 1000,
 

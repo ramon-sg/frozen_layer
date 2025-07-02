@@ -1,18 +1,5 @@
-name: "cleanqueen-cypress"
+name: "frozen-layer"
 services:
-  db:
-    image: postgis/postgis:16-3.4
-    ports:
-      - "${DATABASE_PORT}:5432"
-    volumes:
-      - db:/var/lib/postgresql/data
-
-    env_file:
-      - "${ENV_FILE}"
-    environment:
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      PGDATA: "/var/lib/postgresql/data/pgdata"
   redis:
     image: "bitnami/redis:latest"
     env_file:
@@ -26,6 +13,4 @@ services:
 
 volumes:
   redis:
-    driver: local
-  db:
     driver: local
