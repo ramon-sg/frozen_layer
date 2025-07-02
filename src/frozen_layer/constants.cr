@@ -8,5 +8,5 @@ module FrozenLayer
   DEFAULT_HOST = "localhost"
   DEFAULT_PORT = 3000
 
-  VERSION = "0.1.9"
+  VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
 end
